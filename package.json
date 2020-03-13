@@ -1,0 +1,25 @@
+{
+  "name": "musicapp2",
+  "version": "1.0.0",
+  "description": "Music App like",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "Yuri Cordeiro",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "md5": "^2.2.1",
+    "mongoose": "^5.9.3",
+    "nodemailer": "^6.4.5",
+    "random-hash": "^4.0.1",
+    "streamifier": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
