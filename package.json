@@ -4,7 +4,9 @@
   "description": "Music App like",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "heroku-postbuild": "cd soundhub && npm install && npm run build"
   },
   "author": "Yuri Cordeiro",
   "license": "ISC",
