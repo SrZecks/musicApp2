@@ -33,7 +33,6 @@ export default class Login extends Component {
         //     var idToken = response.id_token;
         //     // You can also now use gapi.client to perform authenticated requests.
         // });
-
     }
 
     handleChange = (e) => {
@@ -59,20 +58,7 @@ export default class Login extends Component {
     }
 
     googleAuth = (e) => {
-        //gapi.auth2.authorize({
-        //     client_id: '558477949158-a9g4lrb4s4jhan64vfcdhji8nhfr0u89.apps.googleusercontent.com',
-        //     scope: 'email profile openid',
-        //     response_type: 'id_token permission'
-        // }, function (response) {
-        //     if (response.error) {
-        //         // An error happened!
-        //         return;
-        //     }
-        //     // The user authorized the application for the scopes requested.
-        //     var accessToken = response.access_token;
-        //     var idToken = response.id_token;
-        //     // You can also now use gapi.client to perform authenticated requests.
-        // });
+        console.log(window.gapi)
     }
 
     render() {
