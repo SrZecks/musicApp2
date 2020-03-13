@@ -19,6 +19,14 @@ export default class Login extends Component {
 
     componentDidMount() {
         M.AutoInit(); // Init materialize
+        window.gapi.signin2.render("googleSignUp", {
+            scope: 'email',
+            width: 200,
+            height: 50,
+            longtitle: true,
+            theme: 'dark',
+        })
+
     }
 
     handleChange = (e) => {
@@ -44,21 +52,7 @@ export default class Login extends Component {
     }
 
     googleAuth = (e) => {
-        console.log(window.gapi);
-        window.gapi.auth2.authorize({
-            client_id: '558477949158-a9g4lrb4s4jhan64vfcdhji8nhfr0u89.apps.googleusercontent.com',
-            scope: 'email profile openid',
-            response_type: 'id_token permission'
-        }, function (response) {
-            if (response.error) {
-                // An error happened!
-                return;
-            }
-            // The user authorized the application for the scopes requested.
-            var accessToken = response.access_token;
-            var idToken = response.id_token;
-            // You can also now use gapi.client to perform authenticated requests.
-        });
+
     }
 
     render() {
@@ -101,7 +95,7 @@ export default class Login extends Component {
 
                         <div className="or"><span>sign up <Link to="/signUp">here</Link>, or sign in with:</span></div>
                         <div className="icons">
-                            <FontAwesomeIcon className="deep-orange-text text-accent-3 g-signin2" icon={['fab', 'google-plus']} onClick={this.googleAuth} />
+                            <FontAwesomeIcon id="googleSignUp" className="deep-orange-text text-accent-3 g-signin2" icon={['fab', 'google-plus']} onClick={this.googleAuth} />
                             <FontAwesomeIcon className="blue-text text-darken-3" icon={['fab', 'facebook']} />
                             <FontAwesomeIcon className="light-blue-text text-lighten-1" icon={['fab', 'twitter']} />
                         </div>
