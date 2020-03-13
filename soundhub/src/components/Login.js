@@ -19,13 +19,7 @@ export default class Login extends Component {
 
     componentDidMount() {
         M.AutoInit(); // Init materialize
-        window.gapi.signin2.render("googleSignUp", {
-            scope: 'email',
-            width: 200,
-            height: 50,
-            longtitle: true,
-            theme: 'dark',
-        })
+
 
     }
 

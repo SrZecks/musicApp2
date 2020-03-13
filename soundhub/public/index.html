@@ -28,6 +28,8 @@
       gapi.load('auth2', function () {
         gapi.auth2.init({
           client_id: '558477949158-a9g4lrb4s4jhan64vfcdhji8nhfr0u89.apps.googleusercontent.com'
+        }).then(result =>{
+            var GoogleAuth = result;
         });
       });
     }
