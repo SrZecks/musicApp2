@@ -25,19 +25,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 // Accept requests from unauthorized servers, remove this in prodocution
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 // Use routes
 app.use('/users', users);
 app.use('/musics', musics);
 
 // Serve static files from the React app on build production
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'soundhub/build')));
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.join(__dirname+'/soundhub/build/index.html'));
 });
 
 const port = process.env.PORT || 5000;
