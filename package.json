@@ -1,6 +1,9 @@
 {
   "name": "musicapp2",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.14.1"
+  },
   "description": "Music App like",
   "main": "app.js",
   "scripts": {
