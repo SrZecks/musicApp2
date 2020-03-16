@@ -17,6 +17,7 @@ export class Googleuser extends Component {
         return (
             <div>
                 <div>ID - {this.state.user.dV}</div>
+                <div>Full Name - {this.state.user.Ad}</div>
                 <div>First Name - {this.state.user.IW}</div>
                 <div>Last Name - {this.state.user.IU}</div>
                 <div>img - <img src={this.state.user.jL}></img></div>

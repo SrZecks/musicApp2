@@ -69,7 +69,7 @@ export default class Login extends Component {
         if (auth.isSignedIn.get()) {
             this.props.history.push({
                 pathname: '/Googleuser',
-                state: { user: this.state.googleUser }
+                state: this.state.googleUser
             })
             /* 
             email - zu
@@ -84,7 +84,7 @@ export default class Login extends Component {
                     this.setState({ googleUser: res.getBasicProfile() });
                     this.props.history.push({
                         pathname: '/Googleuser',
-                        state: { user: this.state.googleUser }
+                        state: this.state.googleUser
                     })
                 })
                 .catch(err => {
