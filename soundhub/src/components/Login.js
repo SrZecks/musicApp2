@@ -16,6 +16,7 @@ export default class Login extends Component {
             email: "",
             password: "",
             check: "false",
+            googleAuth: {},
         }
     }
 
@@ -23,11 +24,15 @@ export default class Login extends Component {
         M.AutoInit(); // Init materialize
 
     }
-    async componentWillMount() {
-        let gapiReady = await gapi.loadGapi();
-        this.setState({ gapiReady: gapiReady })
-        gapi.init()
-
+    componentWillMount() {
+        gapi.loadGapi()
+            .then(async (res) => {
+                this.setState({ gapiReady: res })
+                var auth2 = await gapi.init()
+                this.setState({googleAuth:auth2})
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     handleChange = (e) => {
@@ -36,7 +41,7 @@ export default class Login extends Component {
         this.setState({ [id]: value })
     }
 
-    handleSubmit = async (e) => {
+    handleSubmit = (e) => {
         e.preventDefault()
         axios.get('/users/signIn', { params: this.state })
             .then(res => {

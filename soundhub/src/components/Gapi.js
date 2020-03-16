@@ -23,26 +23,26 @@ const gapiF = {
             document.body.appendChild(script);
         })
     },
-    init: function () {
-        let gapi = window.gapi;
-        gapi.load('auth2', function () {
-            gapi.auth2.init({
-                client_id: '558477949158-a9g4lrb4s4jhan64vfcdhji8nhfr0u89.apps.googleusercontent.com'
-            }).then(result => {
-                var GoogleAuth = result;
-            }).catch(err => {
-                console.log(err)
-            })
+    init: async function () {
+        return new Promise((resolve, reject) => {
+            let gapi = window.gapi;
+            gapi.load('auth2', function () {
+                gapi.auth2.init({
+                    apiKey: 'Um2orjAxTh5_8AdqF-Gj4ogb',
+                    client_id: '558477949158-a9g4lrb4s4jhan64vfcdhji8nhfr0u89.apps.googleusercontent.com'
+                }).then(result => {
+                    resolve(result);
+                }).catch(err => {
+                    console.log(err)
+                })
+            });
         });
     },
-    signOut: function () {
-        let gapi = window.gapi;
-
-        let auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
+    signOut: function (authInstance) {
+        authInstance.signOut().then(function () {
             console.log('User signed out.');
         });
-    }
+    },
 }
 
 export default gapiF;
