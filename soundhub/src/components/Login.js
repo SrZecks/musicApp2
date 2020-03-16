@@ -6,11 +6,13 @@ import Logo from '../img/black_logo.png';
 import Passwordreset from './Passwordreset'
 import M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
+import gapi from './Gapi'
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            gapiReady: false,
             email: "",
             password: "",
             check: "false",
@@ -20,6 +22,11 @@ export default class Login extends Component {
     componentDidMount() {
         M.AutoInit(); // Init materialize
 
+    }
+    async componentWillMount() {
+        let gapiReady = await gapi.loadGapi();
+        this.setState({ gapiReady: gapiReady })
+        gapi.init()
 
     }
 
@@ -50,54 +57,59 @@ export default class Login extends Component {
     }
 
     render() {
-        return (
-            <div className='loginGrid'>
-                {/** Form login area **/}
-                <div className='loginForm'>
-                    <img src={Logo} alt="logo"></img>
+        if (this.state.gapiReady) {
+            return (
+                <div className='loginGrid'>
+                    {/** Form login area **/}
+                    <div className='loginForm'>
+                        <img src={Logo} alt="logo"></img>
 
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="input-field">
-                            <input required id="email" type="text" className="validate" value={this.state.email} onChange={this.handleChange} />
-                            <label htmlFor="email">Email or UserName</label>
-                        </div>
-
-                        <div className="input-field">
-                            <input required id="password" type="password" className="validate" value={this.state.password} onChange={this.handleChange} />
-                            <label htmlFor="password">Password</label>
-                        </div>
-
-                        <div className="optDiv">
-                            <div>
-                                <label>
-                                    <input id="check" type="checkbox" value={this.state.check} onChange={this.handleChange} />
-                                    <span>Save User</span>
-                                </label>
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="input-field">
+                                <input required id="email" type="text" className="validate" value={this.state.email} onChange={this.handleChange} />
+                                <label htmlFor="email">Email or UserName</label>
                             </div>
 
-                            <div style={{ fontSize: 12 }}>
-                                {/**<Link to="/passwordReset">Forgot Password?</Link> */}
-                                <a className="modal-trigger" href="#modal1">Forgot password?</a>
+                            <div className="input-field">
+                                <input required id="password" type="password" className="validate" value={this.state.password} onChange={this.handleChange} />
+                                <label htmlFor="password">Password</label>
                             </div>
-                        </div>
 
-                        <div className="btnLogin">
-                            <button className="waves-effect waves-light" type="submit" >
-                                Sign In
-                            </button>
-                        </div>
+                            <div className="optDiv">
+                                <div>
+                                    <label>
+                                        <input id="check" type="checkbox" value={this.state.check} onChange={this.handleChange} />
+                                        <span>Save User</span>
+                                    </label>
+                                </div>
 
-                        <div className="or"><span>sign up <Link to="/signUp">here</Link>, or sign in with:</span></div>
-                        <div className="icons">
-                            <FontAwesomeIcon id="googleSignUp" className="deep-orange-text text-accent-3 g-signin2" icon={['fab', 'google-plus']} onClick={this.googleAuth} />
-                            <FontAwesomeIcon className="blue-text text-darken-3" icon={['fab', 'facebook']} />
-                            <FontAwesomeIcon className="light-blue-text text-lighten-1" icon={['fab', 'twitter']} />
-                        </div>
-                    </form>
+                                <div style={{ fontSize: 12 }}>
+                                    {/**<Link to="/passwordReset">Forgot Password?</Link> */}
+                                    <a className="modal-trigger" href="#modal1">Forgot password?</a>
+                                </div>
+                            </div>
+
+                            <div className="btnLogin">
+                                <button className="waves-effect waves-light" type="submit" >
+                                    Sign In
+                                </button>
+                            </div>
+
+                            <div className="or"><span>sign up <Link to="/signUp">here</Link>, or sign in with:</span></div>
+                            <div className="icons">
+                                <FontAwesomeIcon id="googleSignUp" className="deep-orange-text text-accent-3 g-signin2" icon={['fab', 'google-plus']} onClick={this.googleAuth} />
+                                <FontAwesomeIcon className="blue-text text-darken-3" icon={['fab', 'facebook']} />
+                                <FontAwesomeIcon className="light-blue-text text-lighten-1" icon={['fab', 'twitter']} />
+                            </div>
+                        </form>
+                    </div>
+
+                    <Passwordreset id="modal1" />
                 </div>
+            )
+        } else {
+            return null
+        }
 
-                <Passwordreset id="modal1" />
-            </div>
-        )
     }
 }
