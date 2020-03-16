@@ -63,7 +63,7 @@ export default class Login extends Component {
         console.log(auth.isSignedIn.get())
         if (auth.isSignedIn.get()) {
             this.setState({ googleUser: auth.currentUser.get().getBasicProfile() });
-            <Redirect to={{
+            return <Redirect to={{
                 pathname: '/Googleuser',
                 state: { user: this.googleUser }
             }}
@@ -79,7 +79,7 @@ export default class Login extends Component {
             auth.signIn()
                 .then(res => {
                     this.setState({ googleUser: res.getBasicProfile() });
-                    <Redirect to={{
+                    return <Redirect to={{
                         pathname: '/Googleuser',
                         state: { user: this.googleUser }
                     }}
