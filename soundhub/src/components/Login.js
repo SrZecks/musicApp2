@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 import Logo from '../img/black_logo.png';
@@ -63,10 +63,11 @@ export default class Login extends Component {
         console.log(auth.isSignedIn.get())
         if (auth.isSignedIn.get()) {
             this.setState({ googleUser: auth.currentUser.get().getBasicProfile() });
-            this.context.router.push({
+            <Redirect to={{
                 pathname: '/Googleuser',
-                state: {user: this.googleUser}
-            });
+                state: { user: this.googleUser }
+            }}
+            />
             /* 
             email - zu
             first name - IW
@@ -78,10 +79,11 @@ export default class Login extends Component {
             auth.signIn()
                 .then(res => {
                     this.setState({ googleUser: res.getBasicProfile() });
-                    this.context.router.push({
+                    <Redirect to={{
                         pathname: '/Googleuser',
-                        state: {user: this.googleUser}
-                    });
+                        state: { user: this.googleUser }
+                    }}
+                    />
                 })
                 .catch(err => {
                     console.log(err)
