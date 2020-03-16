@@ -7,8 +7,6 @@ import axios from 'axios';
 import 'materialize-css/dist/css/materialize.min.css';
 import '../css/App.css';
 
-axios.defaults.baseURL = "https://srzecks-soundhub.herokuapp.com:5000";
-
 library.add(fab, fas);
 
 export default class App extends Component {
