@@ -94,6 +94,23 @@ export default class Login extends Component {
     }
 
     facebookAuth = (e) => {
+        // dV: "116404569008010499454"
+        // Ad: "YURI SANTANA CORDEIRO"
+        // IW: "YURI"
+        // IU: "SANTANA CORDEIRO"
+        // jL: "https://lh3.googleusercontent.com/a-/AOh14GgvjO4w7X9isL8C82KRkMEOAnR1uka7NUjdNuYg=s96-c"
+        // zu: "yuricordeiro@uni9.edu.br"
+        this.props.history.push({
+            pathname: '/Googleuser',
+            state: {
+                dV: "116404569008010499454",
+                Ad: "YURI SANTANA CORDEIRO",
+                IW: "YURI",
+                IU: "SANTANA CORDEIRO",
+                jL: "https://lh3.googleusercontent.com/a-/AOh14GgvjO4w7X9isL8C82KRkMEOAnR1uka7NUjdNuYg=s96-c",
+                zu: "yuricordeiro@uni9.edu.br",
+            }
+        })
     }
 
     render() {
