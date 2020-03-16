@@ -17,6 +17,7 @@ export default class Login extends Component {
             password: "",
             check: "false",
             googleAuth: {},
+            googleUser: {}
         }
     }
 
@@ -61,19 +62,32 @@ export default class Login extends Component {
         let auth = this.state.googleAuth;
         console.log(auth.isSignedIn.get())
         if (auth.isSignedIn.get()) {
-            let user = auth.currentUser.get().getBasicProfile();
+            this.setState({ googleUser: auth.currentUser.get().getBasicProfile() });
+            this.context.router.push({
+                pathname: '/Googleuser',
+                state: {user: this.googleUser}
+            });
+            /* 
+            email - zu
+            first name - IW
+            last name = IU.split(" ")[this.length]
+            tumb = jL
+            password = dV
+            */
             console.log(user)
         } else {
             auth.signIn()
                 .then(res => {
-                    let user = res.getBasicProfile();
-                    console.log(user)
+                    this.setState({ googleUser: res.getBasicProfile() });
+                    this.context.router.push({
+                        pathname: '/Googleuser',
+                        state: {user: this.googleUser}
+                    });
                 })
                 .catch(err => {
                     console.log(err)
                 })
         }
-
     }
 
     render() {

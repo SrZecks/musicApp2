@@ -6,6 +6,7 @@ import App from './components/App';
 import Login from './components/Login';
 import Signup from './components/Signup.js';
 import Passwordreset from './components/Passwordreset';
+import Googleuser from './components/Googleuser';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
             <Route path="/" exact={true} component={App}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/signUp" component={Signup}></Route>
+            <Route path="/Googleuser" component={Googleuser}></Route>
             <Route path="/passwordReset" component={Passwordreset}></Route>
         </Switch>
     </Router>
