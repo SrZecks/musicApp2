@@ -74,7 +74,6 @@ export default class Login extends Component {
             tumb = jL
             password = dV
             */
-            console.log(user)
         } else {
             auth.signIn()
                 .then(res => {
