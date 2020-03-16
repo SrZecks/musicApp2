@@ -60,7 +60,7 @@ export default class Login extends Component {
     googleAuth = (e) => {
         let auth = this.state.googleAuth;
 
-        if (auth.isSignedIn) {
+        if (auth.isSignedIn.get()) {
             console.log("already signed")
         } else {
             auth.signIn()
