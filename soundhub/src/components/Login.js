@@ -71,13 +71,6 @@ export default class Login extends Component {
                 pathname: '/Googleuser',
                 state: this.state.googleUser
             })
-            /* 
-            email - zu
-            first name - IW
-            last name = IU.split(" ")[this.length]
-            tumb = jL
-            password = dV
-            */
         } else {
             auth.signIn()
                 .then(res => {
@@ -91,26 +84,6 @@ export default class Login extends Component {
                     console.log(err)
                 })
         }
-    }
-
-    facebookAuth = (e) => {
-        // dV: "116404569008010499454"
-        // Ad: "YURI SANTANA CORDEIRO"
-        // IW: "YURI"
-        // IU: "SANTANA CORDEIRO"
-        // jL: "https://lh3.googleusercontent.com/a-/AOh14GgvjO4w7X9isL8C82KRkMEOAnR1uka7NUjdNuYg=s96-c"
-        // zu: "yuricordeiro@uni9.edu.br"
-        this.props.history.push({
-            pathname: '/Googleuser',
-            state: {
-                dV: "116404569008010499454",
-                Ad: "YURI SANTANA CORDEIRO",
-                IW: "YURI",
-                IU: "SANTANA CORDEIRO",
-                jL: "https://lh3.googleusercontent.com/a-/AOh14GgvjO4w7X9isL8C82KRkMEOAnR1uka7NUjdNuYg=s96-c",
-                zu: "yuricordeiro@uni9.edu.br",
-            }
-        })
     }
 
     render() {
@@ -155,7 +128,7 @@ export default class Login extends Component {
                             <div className="or"><span>sign up <Link to="/signUp">here</Link>, or sign in with:</span></div>
                             <div className="icons">
                                 <FontAwesomeIcon id="googleSignUp" className="deep-orange-text text-accent-3 g-signin2" icon={['fab', 'google-plus']} onClick={this.googleAuth} />
-                                <FontAwesomeIcon className="blue-text text-darken-3" icon={['fab', 'facebook']} onClick={this.facebookAuth} />
+                                <FontAwesomeIcon className="blue-text text-darken-3" icon={['fab', 'facebook']} />
                                 <FontAwesomeIcon className="light-blue-text text-lighten-1" icon={['fab', 'twitter']} />
                             </div>
                         </form>
