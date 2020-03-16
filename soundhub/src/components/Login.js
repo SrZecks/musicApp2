@@ -34,6 +34,8 @@ export default class Login extends Component {
                 this.setState({ gapiReady: res })
                 var auth2 = await gapi.init()
                 this.setState({ googleAuth: auth2 })
+                this.setState({ googleUser: auth2.currentUser.get().getBasicProfile() });
+
             }).catch(err => {
                 console.log(err)
             })
@@ -65,7 +67,6 @@ export default class Login extends Component {
         let auth = this.state.googleAuth;
         console.log(auth.isSignedIn.get())
         if (auth.isSignedIn.get()) {
-            this.setState({ googleUser: auth.currentUser.get().getBasicProfile() });
             this.props.history.push({
                 pathname: '/Googleuser',
                 state: { user: this.googleUser }
