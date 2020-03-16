@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { Link, Route, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 import Logo from '../img/black_logo.png';
@@ -7,8 +7,10 @@ import Passwordreset from './Passwordreset'
 import M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import gapi from './Gapi'
+import Googleuser from './Googleuser';
 
 export default class Login extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +27,7 @@ export default class Login extends Component {
         M.AutoInit(); // Init materialize
 
     }
+
     componentWillMount() {
         gapi.loadGapi()
             .then(async (res) => {
@@ -63,11 +66,10 @@ export default class Login extends Component {
         console.log(auth.isSignedIn.get())
         if (auth.isSignedIn.get()) {
             this.setState({ googleUser: auth.currentUser.get().getBasicProfile() });
-            return <Redirect to={{
+            this.props.history.push({
                 pathname: '/Googleuser',
                 state: { user: this.googleUser }
-            }}
-            />
+            })
             /* 
             email - zu
             first name - IW
@@ -79,16 +81,18 @@ export default class Login extends Component {
             auth.signIn()
                 .then(res => {
                     this.setState({ googleUser: res.getBasicProfile() });
-                    return <Redirect to={{
+                    this.props.history.push({
                         pathname: '/Googleuser',
                         state: { user: this.googleUser }
-                    }}
-                    />
+                    })
                 })
                 .catch(err => {
                     console.log(err)
                 })
         }
+    }
+
+    facebookAuth = (e) => {
     }
 
     render() {
@@ -133,7 +137,7 @@ export default class Login extends Component {
                             <div className="or"><span>sign up <Link to="/signUp">here</Link>, or sign in with:</span></div>
                             <div className="icons">
                                 <FontAwesomeIcon id="googleSignUp" className="deep-orange-text text-accent-3 g-signin2" icon={['fab', 'google-plus']} onClick={this.googleAuth} />
-                                <FontAwesomeIcon className="blue-text text-darken-3" icon={['fab', 'facebook']} />
+                                <FontAwesomeIcon className="blue-text text-darken-3" icon={['fab', 'facebook']} onClick={this.facebookAuth} />
                                 <FontAwesomeIcon className="light-blue-text text-lighten-1" icon={['fab', 'twitter']} />
                             </div>
                         </form>
