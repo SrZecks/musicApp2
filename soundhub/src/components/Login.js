@@ -29,7 +29,7 @@ export default class Login extends Component {
             .then(async (res) => {
                 this.setState({ gapiReady: res })
                 var auth2 = await gapi.init()
-                this.setState({googleAuth:auth2})
+                this.setState({ googleAuth: auth2 })
             }).catch(err => {
                 console.log(err)
             })
@@ -58,6 +58,19 @@ export default class Login extends Component {
     }
 
     googleAuth = (e) => {
+        let auth = this.state.googleAuth;
+
+        if (auth.isSignedIn) {
+            console.log("already signed")
+        } else {
+            auth.signIn()
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
     }
 
