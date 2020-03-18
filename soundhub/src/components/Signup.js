@@ -211,17 +211,11 @@ export class Signup extends Component {
             }
         }
     }
-    goBack = (e) => {
-        this.props.history.push({ pathname: '/Login' })
-    }
 
     render() {
         return (
             <div className='loginGrid'>
                 <div className='loginForm animated slideInLeft'>
-                    <div className="goBackLogin" onClick={this.goBack}>
-                        <FontAwesomeIcon icon={['fas', 'arrow-left']} />
-                    </div>
                     <h4>Create your SoundHub account</h4>
                     <form id="myform" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                         <div className="grid3">
