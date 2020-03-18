@@ -1,3 +1,6 @@
+import 'materialize-css/dist/css/materialize.min.css';
+import '@sweetalert2/theme-material-ui/material-ui.css';
+import '../css/animate.css'
 import React, { Component } from 'react';
 import { Link, Route, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -5,9 +8,11 @@ import axios from 'axios';
 import Logo from '../img/black_logo.png';
 import Passwordreset from './Passwordreset'
 import M from 'materialize-css';
-import 'materialize-css/dist/css/materialize.min.css';
 import gapi from './Gapi'
-import Googleuser from './Googleuser';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 export default class Login extends Component {
 

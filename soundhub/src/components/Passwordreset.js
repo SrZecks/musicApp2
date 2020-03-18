@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import M from 'materialize-css';
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+
 export class Passwordreset extends Component {
     constructor(props) {
         super(props);
@@ -46,7 +51,19 @@ export class Passwordreset extends Component {
         modal.close();
         axios.post('/users/pswdEmail', { email: email.value })
             .then(res => { alert(`Email sent`); this.setState({ pswdEmail: "" }); })
-            .catch(err => { console.log(err) });
+            .catch(err => {
+                console.log(err)
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    showClass: {
+                        popup: 'animated fadeInDown faster'
+                    },
+                    hideClass: {
+                        popup: 'animated fadeOutUp faster'
+                    }
+                })
+            });
     }
 
     render() {
