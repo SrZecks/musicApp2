@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import M from 'materialize-css';
 import Userdefault from '../img/user-default.png';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 export class Signup extends Component {
     constructor(props) {
@@ -59,7 +63,6 @@ export class Signup extends Component {
 
             if (id === "file") formData.append('tumb', this.state.file[0]);
             else formData.append(id, value)
-
         }
 
         let config = {
@@ -69,8 +72,57 @@ export class Signup extends Component {
             config: { headers: { 'Content-Type': 'multipart/form-data' } }
         }
 
-        let response = await axios(config);
-        console.log(response)
+        MySwal.fire({
+            icon: 'question',
+            title: 'Confirm account?',
+            html: 'You can change some info later',
+            confirmButtonText: 'Create account',
+            heightAuto: false,
+            showClass: {
+                popup: 'animated fadeInDown faster'
+            },
+            hideClass: {
+                popup: 'animated fadeOutUp faster'
+            }
+        }).then(result => {
+            if (result.value) {
+                axios(config)
+                    .then(res => {
+                        console.log(res)
+                        MySwal.fire({
+                            icon: 'success',
+                            title: 'Yeah!',
+                            html: 'Your account has been created',
+                            heightAuto: false,
+                            timer: 4000,
+                            showClass: {
+                                popup: 'animated fadeInDown faster'
+                            },
+                            hideClass: {
+                                popup: 'animated fadeOutUp faster'
+                            }
+                        }).then(() => {
+                            this.props.history.push({ pathname: '/Login' })
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        MySwal.fire({
+                            icon: 'error',
+                            title: 'Oh no!',
+                            html: 'Something went wrong, please contact our support group <a href="#">here</a>',
+                            heightAuto: false,
+                            timer: 4000,
+                            showClass: {
+                                popup: 'animated fadeInDown faster'
+                            },
+                            hideClass: {
+                                popup: 'animated fadeOutUp faster'
+                            }
+                        })
+                    })
+            }
+        })
     }
 
     checkUser = async (e) => {
@@ -159,11 +211,17 @@ export class Signup extends Component {
             }
         }
     }
+    goBack = (e) => {
+        this.props.history.push({ pathname: '/Login' })
+    }
 
     render() {
         return (
             <div className='loginGrid'>
-                <div className='loginForm'>
+                <div className='loginForm animated slideInLeft'>
+                    <div className="goBackLogin" onClick={this.goBack}>
+                        <FontAwesomeIcon icon={['fas', 'arrow-left']} />
+                    </div>
                     <h4>Create your SoundHub account</h4>
                     <form id="myform" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                         <div className="grid3">

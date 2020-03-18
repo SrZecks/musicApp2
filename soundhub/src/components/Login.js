@@ -1,8 +1,5 @@
-import 'materialize-css/dist/css/materialize.min.css';
-import '@sweetalert2/theme-material-ui/material-ui.css';
-import '../css/animate.css'
 import React, { Component } from 'react';
-import { Link, Route, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 import Logo from '../img/black_logo.png';
@@ -33,7 +30,7 @@ export default class Login extends Component {
 
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         gapi.loadGapi()
             .then(async (res) => {
                 this.setState({ gapiReady: res })
@@ -96,7 +93,7 @@ export default class Login extends Component {
             return (
                 <div className='loginGrid'>
                     {/** Form login area **/}
-                    <div className='loginForm'>
+                    <div className='loginForm animated slideInRight'>
                         <img src={Logo} alt="logo"></img>
 
                         <form onSubmit={this.handleSubmit}>

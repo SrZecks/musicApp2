@@ -3,9 +3,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import M from 'materialize-css';
-import axios from 'axios';
+import Swal from 'sweetalert2'
 import 'materialize-css/dist/css/materialize.min.css';
 import '../css/App.css';
+import '../css/animate.css'
+import '../scss/app.scss'
 
 library.add(fab, fas);
 

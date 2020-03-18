@@ -25,6 +25,7 @@ html, body, #root{
 }
 
 .loginForm{
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 14px 4%;
@@ -34,6 +35,15 @@ html, body, #root{
   color: #262626;
 }
 
+.goBackLogin{
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgb(43, 43, 43);
+  opacity: 0.8;
+  padding: 8px;
+  cursor: pointer;
+}
 .loginForm img {
     width: 45%;
     align-self: center;

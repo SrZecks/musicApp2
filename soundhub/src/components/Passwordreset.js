@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import M from 'materialize-css';
 import axios from 'axios'
+import emailPng from '../img/email.png'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -54,8 +55,15 @@ export class Passwordreset extends Component {
             .catch(err => {
                 console.log(err)
                 MySwal.fire({
-                    icon: 'error',
-                    title: 'Error',
+                    imageUrl: emailPng,
+                    imageWidth: 180,
+                    imageHeight: 180,
+                    imageAlt: 'Custom image',
+                    title: 'Email sent',
+                    html: 'Check your email to reset your password',
+                    heightAuto: false,
+                    showConfirmButton: false,
+                    timer: 4000,
                     showClass: {
                         popup: 'animated fadeInDown faster'
                     },
