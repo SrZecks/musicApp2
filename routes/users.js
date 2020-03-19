@@ -44,8 +44,8 @@ router.get("/signIn", async (req, res, next) => {
     let user = await findEmail(email);
 
     if (user == null) user = await findUserName(email);
-
-    if (md5(password) == user.password) { res.status(200).send(JSON.stringify(user,getCircularReplacer())) }
+    console.log(user)
+    if (md5(password) == user.password) { res.status(200).json(user) }
     else { res.sendStatus(403) }
 });
 
