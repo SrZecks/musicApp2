@@ -43,9 +43,9 @@ router.get("/signIn", async (req, res, next) => {
 
     let user = await findEmail(email);
 
-    if(user == null) user = await findUserName(email);
+    if (user == null) user = await findUserName(email);
 
-    if (md5(password) == user.password) { res.status(200).json(user) }
+    if (md5(password) == user.password) { res.status(200).send(user) }
     else { res.sendStatus(403) }
 });
 
@@ -141,7 +141,7 @@ router.delete("/:userId", (req, res, next) => {
 function findEmail(email, next) {
     return new Promise(function (resolve, reject) {
         User.findOne({ email: email }, (err, docs) => {
-            if (err)  resolve(next(err));
+            if (err) resolve(next(err));
             resolve(docs)
         })
     });
@@ -149,7 +149,7 @@ function findEmail(email, next) {
 function findUserName(userName, next) {
     return new Promise(function (resolve, reject) {
         User.findOne({ userName: userName }, (err, docs) => {
-            if (err)  resolve(next(err));
+            if (err) resolve(next(err));
             resolve(docs)
         })
     });
