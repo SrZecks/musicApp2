@@ -60,7 +60,6 @@ export default class Login extends Component {
                 console.log(err)
                 if (String(err).indexOf("403") > -1) alert("User or password wrong");
                 else if (String(err).indexOf("404") > -1) alert("User not found");
-
             });
 
     }

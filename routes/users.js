@@ -45,7 +45,7 @@ router.get("/signIn", async (req, res, next) => {
 
     if (user == null) user = await findUserName(email);
 
-    if (md5(password) == user.password) { res.status(200).send(user) }
+    if (md5(password) == user.password) { res.status(200).send(JSON.stringify(user)) }
     else { res.sendStatus(403) }
 });
 
