@@ -53,7 +53,7 @@ export default class Login extends Component {
         e.preventDefault()
         axios.get('/users/signIn', { params: this.state })
             .then(res => {
-                console.log(res.data)
+                console.log(res)
                 alert("User logged in")
             })
             .catch(err => {

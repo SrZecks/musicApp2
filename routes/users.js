@@ -6,6 +6,7 @@ const streamifier = require("streamifier");
 const hash = require("random-hash");
 const nodemailer = require("nodemailer");
 const md5 = require("md5");
+const stringfy = require('json-stringify-safe')
 
 // Mongo Connection
 const mongoURI = "mongodb+srv://yuri:fgmbr4YF9icExBW8@react-fjapq.mongodb.net/musicTest?retryWrites=true&w=majority";
@@ -38,14 +39,13 @@ router.get("/find/:hash", (req, res, next) => {
 });
 
 router.get("/signIn", async (req, res, next) => {
-    console.log(req)
     let { email, password } = req.query;
 
     let user = await findEmail(email);
 
     if (user == null) user = await findUserName(email);
 
-    if (md5(password) == user.password) { res.status(200).send(JSON.stringify(user)) }
+    if (md5(password) == user.password) { res.status(200).send(stringfy(user, null, 2)) }
     else { res.sendStatus(403) }
 });
 
