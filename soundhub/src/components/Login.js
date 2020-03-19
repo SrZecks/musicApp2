@@ -51,12 +51,19 @@ export default class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        axios.get('/users/signIn', { params: this.state })
+        
+        let config = {
+            method: 'GET',
+            url: '/users/signIn',
+            params: this.state,
+        }
+        axios(config)
             .then(res => {
                 console.log(res.data)
                 alert("User logged in")
             })
             .catch(err => {
+                console.log(err);
                 if (String(err).indexOf("403") > -1) { alert("User or password wrong"); }
                 else if (String(err).indexOf("404") > -1) { alert("User not found"); }
                 else { alert("Error") }
