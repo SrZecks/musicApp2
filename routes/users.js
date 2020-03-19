@@ -45,7 +45,7 @@ router.get("/signIn", async (req, res, next) => {
 
     if (user == null) user = await findUserName(email);
 
-    if (md5(password) == user.password) { res.status(200).send(stringfy(user, null, 2)) }
+    if (md5(password) == user.password) { res.status(200).send(JSON.stringify(user,getCircularReplacer())) }
     else { res.sendStatus(403) }
 });
 
@@ -138,6 +138,20 @@ router.delete("/:userId", (req, res, next) => {
         });
     });
 })
+
+function getCircularReplacer() {
+    const seen = new WeakSet();
+    return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+                return;
+            }
+            seen.add(value);
+        }
+        return value;
+    };
+};
+
 function findEmail(email, next) {
     return new Promise(function (resolve, reject) {
         User.findOne({ email: email }, (err, docs) => {
