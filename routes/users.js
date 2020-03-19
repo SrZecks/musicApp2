@@ -39,14 +39,19 @@ router.get("/find/:hash", (req, res, next) => {
 });
 
 router.get("/signIn", async (req, res, next) => {
-    let { email, password } = req.query;
+    try {
+        let { email, password } = req.query;
 
-    let user = await findEmail(email);
+        let user = await findEmail(email);
+    
+        if (user == null) user = await findUserName(email);
+        console.log(user)
+        if (md5(password) == user.password) { res.sendStatus(200) }
+        else { res.sendStatus(403) } 
 
-    if (user == null) user = await findUserName(email);
-    console.log(user)
-    if (md5(password) == user.password) { res.status(200).json(user) }
-    else { res.sendStatus(403) }
+    } catch (error) {
+        res.status(500).send(error)
+    }
 });
 
 router.get("/check", (req, res, next) => {

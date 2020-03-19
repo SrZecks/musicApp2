@@ -31,14 +31,14 @@ app.use(express.static('public'));
 app.use('/users', users);
 app.use('/musics', musics);
 
-// Serve static files from the React app on build production
-app.use(express.static(path.join(__dirname, 'soundhub/build')));
-
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname +'/soundhub/build/index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+    // Serve static files from the React app on build production
+    app.use(express.static(path.join(__dirname, 'soundhub/build')));
+    // Handle React routing, return all requests to React app
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname + '/soundhub/build/index.html'));
+    });
+}
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`))
