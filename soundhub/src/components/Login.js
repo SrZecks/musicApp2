@@ -53,15 +53,14 @@ export default class Login extends Component {
         e.preventDefault()
         axios.get('/users/signIn', { params: this.state })
             .then(res => {
-                console.log(res)
+                console.log(res.data)
                 alert("User logged in")
             })
             .catch(err => {
-                console.log(err)
-                if (String(err).indexOf("403") > -1) alert("User or password wrong");
-                else if (String(err).indexOf("404") > -1) alert("User not found");
+                if (String(err).indexOf("403") > -1) { alert("User or password wrong"); }
+                else if (String(err).indexOf("404") > -1) { alert("User not found"); }
+                else { alert("Error") }
             });
-
     }
 
     googleAuth = (e) => {
