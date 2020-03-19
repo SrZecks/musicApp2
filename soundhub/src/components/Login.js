@@ -51,11 +51,11 @@ export default class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        
+
         let config = {
             method: 'GET',
             url: '/users/signIn',
-            params: this.state,
+            params: { email: this.state.email, password: this.state.password }
         }
         axios(config)
             .then(res => {
