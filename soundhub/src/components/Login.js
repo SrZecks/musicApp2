@@ -98,7 +98,7 @@ export default class Login extends Component {
             return (
                 <div className='loginGrid'>
                     {/** Form login area **/}
-                    <div className='loginForm animated slideInRight'>
+                    <div className='loginForm'>
                         <img src={Logo} alt="logo"></img>
 
                         <form onSubmit={this.handleSubmit}>

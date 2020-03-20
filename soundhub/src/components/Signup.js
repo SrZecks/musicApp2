@@ -34,12 +34,10 @@ export class Signup extends Component {
         var textNeedCount = document.querySelectorAll('#password, #confPassword');
         M.CharacterCounter.init(textNeedCount);
     }
-
     handleChange = (e) => {
         let { id, value } = e.target;
         this.setState({ [id]: value })
     }
-
     handleFile = (e) => {
         let { files } = e.target;
         console.log(files)
@@ -52,7 +50,6 @@ export class Signup extends Component {
         }
 
     }
-
     handleSubmit = async (e) => {
         e.preventDefault()
         var myform = e.target
@@ -124,7 +121,6 @@ export class Signup extends Component {
             }
         })
     }
-
     checkUser = async (e) => {
         let userName = this.state.userName;
         let inputUser = document.getElementById('userName');
@@ -178,7 +174,6 @@ export class Signup extends Component {
             this.setState({ helperMsg: { emailError: "Invalid Email", success: "" } })
         }
     }
-
     checkPassword = (e) => {
         let { password, confPassword } = this.state;
 
@@ -215,7 +210,7 @@ export class Signup extends Component {
     render() {
         return (
             <div className='loginGrid'>
-                <div className='loginForm animated slideInLeft'>
+                <div className='loginForm fadeInDown'>
                     <h4>Create your SoundHub account</h4>
                     <form id="myform" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                         <div className="grid3">
