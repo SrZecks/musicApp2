@@ -46,6 +46,8 @@ router.get("/signIn", async (req, res, next) => {
 
         if (user == null) user = await findUserName(email);
         console.log(user)
+        if (user == null) return res.status(404).send("Email or User not found")
+
         if (md5(password) == user.password) { res.json(user) }
         else { res.sendStatus(403) }
 
