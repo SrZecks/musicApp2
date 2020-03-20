@@ -179,6 +179,7 @@ export class Signup extends Component {
 
         let divPassword = document.getElementById("password");
         let divconfPassword = document.getElementById("confPassword");
+        let requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,16}$/;
 
         if (password !== "" && confPassword !== "") {
             if (password !== confPassword) {
@@ -193,16 +194,27 @@ export class Signup extends Component {
 
                 this.setState({ helperMsg: { pswError: "Passwords doesn't match", pswSuccess: "" } })
             } else {
-                divPassword.setCustomValidity("");
-                divconfPassword.setCustomValidity("");
+                if (password.match(requirements) && confPassword.match(requirements)) {
+                    divPassword.setCustomValidity("");
+                    divconfPassword.setCustomValidity("");
 
-                divPassword.classList.add("valid");
-                divconfPassword.classList.add("valid");
+                    divPassword.classList.add("valid");
+                    divconfPassword.classList.add("valid");
 
-                divPassword.classList.remove("invalid");
-                divconfPassword.classList.remove("invalid");
+                    divPassword.classList.remove("invalid");
+                    divconfPassword.classList.remove("invalid");
 
-                this.setState({ helperMsg: { pswError: "", pswSuccess: "✔" } })
+                    this.setState({ helperMsg: { pswError: "", pswSuccess: "✔" } })
+                } else {
+                    divPassword.setCustomValidity("Password requires 8 to 16 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
+                    divconfPassword.setCustomValidity("Password requires 8 to 16 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
+
+                    divPassword.classList.add("invalid");
+                    divconfPassword.classList.add("invalid");
+
+                    divPassword.classList.remove("valid");
+                    divconfPassword.classList.remove("valid");
+                }
             }
         }
     }
@@ -251,12 +263,12 @@ export class Signup extends Component {
 
                         <div className="grid2" style={{ marginTop: -10 }}>
                             <div className="input-field">
-                                <input required maxLength="12" data-length="12" id="password" type="password" className="input_text" value={this.state.password} onBlur={this.checkPassword} onChange={this.handleChange} />
+                                <input required maxLength="16" data-length="16" id="password" type="password" className="input_text" value={this.state.password} onBlur={this.checkPassword} onChange={this.handleChange} />
                                 <label htmlFor="password">Password</label>
                             </div>
 
                             <div className="input-field">
-                                <input required maxLength="12" data-length="12" id="confPassword" type="password" className="input_text" value={this.state.confPassword} onBlur={this.checkPassword} onChange={this.handleChange} />
+                                <input required maxLength="16" data-length="16" id="confPassword" type="password" className="input_text" value={this.state.confPassword} onBlur={this.checkPassword} onChange={this.handleChange} />
                                 <label htmlFor="confPassword">Confirm password</label>
                             </div>
                         </div>
