@@ -210,7 +210,7 @@ export class Signup extends Component {
     render() {
         return (
             <div className='loginGrid'>
-                <div className='loginForm fadeInDown'>
+                <div className='loginForm animated fadeInDown'>
                     <h4>Create your SoundHub account</h4>
                     <form id="myform" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                         <div className="grid3">
