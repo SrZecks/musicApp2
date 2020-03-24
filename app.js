@@ -21,7 +21,7 @@ const musics = require('./routes/musics');
 const app = express();
 
 // Middlewares
-app.use(cors()) //this is to enable cors policy, for now let's just leave this commented
+app.use(cors({origin:"https://srzecks-soundhub.herokuapp.com/"})) //this is to enable cors policy, for now let's just leave this commented
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
