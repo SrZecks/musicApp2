@@ -7,7 +7,11 @@ var userSchema = new mongoose.Schema({
     userHash: { type: String, required: true, index: true },
     password: { type: String, required: true },
     email: { type: String, required: true },
-    tumbId: { type: String, required: true },
+    tumbId: { type: String, default: "" },
+    googleTumb: { type: String, default: "" },
+    isGoogleAccount: { type: Boolean, default: false },
+    firstTime: { type: Boolean, default: true },
+    validated: { type: Boolean, default: false },
     followers: { type: Array }
 })
 

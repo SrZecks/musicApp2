@@ -72,20 +72,35 @@ export default class Login extends Component {
 
     googleAuth = (e) => {
         let auth = this.state.googleAuth;
-        console.log(auth.isSignedIn.get())
+
         if (auth.isSignedIn.get()) {
-            this.props.history.push({
-                pathname: '/Googleuser',
-                state: this.state.googleUser
-            })
-        } else {
-            auth.signIn()
+            axios.get('/users/check', { params: { email: this.state.googleUser.zu } })
                 .then(res => {
-                    this.setState({ googleUser: res.getBasicProfile() });
+                    console.log(res)
                     this.props.history.push({
                         pathname: '/Googleuser',
                         state: this.state.googleUser
                     })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
+        } else {
+            auth.signIn()
+                .then(res => {
+                    this.setState({ googleUser: res.getBasicProfile() });
+                    axios.get('/users/check', { params: { email: this.state.googleUser.zu } })
+                        .then(res => {
+                            console.log(res)
+                            this.props.history.push({
+                                pathname: '/Googleuser',
+                                state: this.state.googleUser
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
                 })
                 .catch(err => {
                     console.log(err)

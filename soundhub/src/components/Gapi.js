@@ -5,7 +5,7 @@ const gapiF = {
                 console.log('Client is ready! Now you can access gapi. :)');
                 resolve(true)
             } else {
-                console.log('Client wasn\'t ready, trying again in 100ms');
+                console.log("Client wasn't ready, trying again in 100ms");
                 setTimeout(() => { gapiF.gapiReady(script) }, 100);
             }
         });

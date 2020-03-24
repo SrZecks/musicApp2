@@ -7,7 +7,7 @@ const fs = require("fs");
 const mongoose = require('mongoose');
 
 // Mongo Connection
-const mongoURI = "mongodb+srv://yuri:fgmbr4YF9icExBW8@react-fjapq.mongodb.net/musicTest?retryWrites=true&w=majority";
+const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
 const conn = mongoose.connection;
 conn.on('error', err => handleError(err));
@@ -210,5 +210,3 @@ async function uploadFile(form) {
 }
 
 module.exports = router;
-
-//5e4d362c01da4442543330ae

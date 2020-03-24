@@ -1,3 +1,5 @@
+//Secrets
+require('dotenv').config();   
 // NPM Modules
 const express = require('express');
 const mongoose = require('mongoose');
@@ -6,7 +8,7 @@ const cors = require('cors');
 const path = require('path');
 
 // Mongo Connection
-const mongoURI = "mongodb+srv://yuri:fgmbr4YF9icExBW8@react-fjapq.mongodb.net/musicTest?retryWrites=true&w=majority";
+const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
 const conn = mongoose.connection;
 conn.on('error', err => handleError(err));

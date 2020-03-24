@@ -9,7 +9,7 @@ const md5 = require("md5");
 const stringfy = require('json-stringify-safe')
 
 // Mongo Connection
-const mongoURI = "mongodb+srv://yuri:fgmbr4YF9icExBW8@react-fjapq.mongodb.net/musicTest?retryWrites=true&w=majority";
+const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
 const conn = mongoose.connection;
 conn.on('error', err => handleError(err));
@@ -85,7 +85,7 @@ router.post("/pswdEmail", (req, res, next) => {
         service: 'gmail',
         auth: {
             user: 'soundhubverify@gmail.com',
-            pass: 'jkdbudtgxtcuoseg'
+            pass: process.env.PSWD_RESET
         }
     });
 
@@ -114,6 +114,27 @@ router.post("/signUp", async (req, res, next) => {
         tumbId: tumbId,
         password: md5(password),
         email: email,
+    })
+
+    user.save(function (err, doc) {
+        if (err) return next(err);
+        res.json(doc)
+    });
+});
+
+router.post("/signUpG", async (req, res, next) => {
+    let { IW, IU, dV, zu, jL } = req.body
+
+    let user = new User({
+        firstName: IW,
+        lastName: IU,
+        userName: dV,
+        userHash: "#" + hash.generateHash({ length: 6 }),
+        password: md5(dV),
+        email: zu,
+        googleTumb: jL,
+        isGoogleAccount: true,
+        validated: true
     })
 
     user.save(function (err, doc) {
@@ -158,7 +179,6 @@ function getCircularReplacer() {
         return value;
     };
 };
-
 function findEmail(email, next) {
     return new Promise(function (resolve, reject) {
         User.findOne({ email: email }, (err, docs) => {
